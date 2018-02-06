@@ -40,13 +40,14 @@ h1 {
     font-size: 5rem;
 }
 
-table {
-    display: flex;
-    justify-content: center;
+.parentBlock {
+    display: table;
+    margin: 0 auto;
     border-collapse: collapse;
 }
 
-td {
+.cell {
+    display: table-cell;
     width: 120px;
     height: 120px;
     border: 8px solid #8c8888;
@@ -55,6 +56,11 @@ td {
     color: #4c4c4c;
     font-size: 4em;
     font-weight: 600;
+}
+
+.foo {
+    display: flex;
+    flex-direction: column;
 }
 
 #newGame {
