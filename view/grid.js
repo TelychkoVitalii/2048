@@ -12,6 +12,9 @@ function ShowMatrix() {
             div.classList.add('cell');
             root.appendChild(div);
         }
+    };
+    this.render = function () {
+        this.showGrid();
     }
 }
 

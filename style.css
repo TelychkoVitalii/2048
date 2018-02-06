@@ -58,11 +58,6 @@ h1 {
     font-weight: 600;
 }
 
-.foo {
-    display: flex;
-    flex-direction: column;
-}
-
 #newGame {
     width: 200px;
     margin: 30px auto 0 auto;

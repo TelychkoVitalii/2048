@@ -1,5 +1,5 @@
 function ShowSummary() {
-    var summaryModel = new SummaryModel(7, 0);
+    var summaryModel = new SummaryModel(2, 0);
     this.showTotalScore = function () {
         var score = document.getElementById('scoreResult');
         score.innerHTML = summaryModel.total;
@@ -8,4 +8,8 @@ function ShowSummary() {
         var best = document.getElementById('bestResult');
         best.innerHTML = summaryModel.best;
     };
+    this.render = function () {
+        this.showTotalScore();
+        this.showBestScore();
+    }
 }
