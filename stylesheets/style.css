@@ -1,0 +1,17 @@
+@import "summary.css";
+@import "matrix.css";
+
+body {
+    font-family: 'Rubik Mono One', sans-serif;
+}
+
+#newGame {
+    width: 200px;
+    margin: 30px auto 0 auto;
+    text-align: center;
+    background: lightgray;
+    color: white;
+    padding: 3px 10px;
+    cursor: pointer;
+    user-select: none;
+}

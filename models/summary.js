@@ -1,4 +1,6 @@
 function SummaryModel(total, best) {
-    this.total = total;
-    this.best = best;
+    this.attributes = {
+        total: total,
+        best: best
+    }
 }

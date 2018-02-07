@@ -1,0 +1,22 @@
+.parentBlock {
+    display: table;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.row {
+    display: table-row;
+}
+
+.cell {
+    display: table-cell;
+    width: 120px;
+    height: 120px;
+    vertical-align: middle;
+    border: 8px solid #8c8888;
+    background-color: #dcd8d8;
+    text-align: center;
+    color: #4c4c4c;
+    font-size: 4em;
+    font-weight: 600;
+}

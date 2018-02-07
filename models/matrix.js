@@ -1,6 +1,13 @@
 function MatrixModel() {
-    this.size = {width: 4, height: 4};
-    this.grid = [];
+    this.attributes = {
+        size: {width: 4, height: 4},
+        grid: [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 2, 0],
+            [0, 0, 0, 0]
+        ]
+    };
 }
 
 

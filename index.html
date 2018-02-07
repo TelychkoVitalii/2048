@@ -5,27 +5,40 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
     <title>2048</title>
 </head>
 <body>
-<div class="header">
-    <h1>2048</h1>
-    <div class="math">
-        <div class="score">
-            <h2>Score</h2>
-            <span id="scoreResult">0</span>
-        </div>
-        <div class="best">
-            <h2>Best</h2>
-            <span id="bestResult">0</span>
+
+<div id="root"></div>
+
+<script type="text/html" id="summaryTemplate">
+    <div class="header">
+        <h1 id="gameTitle">2048</h1>
+        <div class="math">
+            <div class="score">
+                <h2>Score</h2>
+                <span id="scoreResult">{{total}}</span>
+            </div>
+            <div class="best">
+                <h2>Best</h2>
+                <span id="bestResult">{{best}}</span>
+            </div>
         </div>
     </div>
-</div>
-<div id="root"></div>
-<div id="newGame">
-    <h2>New Game</h2>
-</div>
+</script>
+
+<script type="text/html" id="matrixTemplate">
+    <div>
+        {{matrix}}
+    </div>
+    <div id="newGame">
+        <h2>New Game</h2>
+    </div>
+</script>
+
+<script src="utils/util.js"></script>
+<script src="controllers/keyboardActions.js"></script>
 <script src="models/matrix.js"></script>
 <script src="models/summary.js"></script>
 <script src="view/summary.js"></script>

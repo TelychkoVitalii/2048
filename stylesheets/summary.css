@@ -1,0 +1,37 @@
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.math {
+    display: flex;
+    flex-direction: row;
+    margin-left: 6%;
+}
+
+#gameTitle {
+    font-size: 5rem;
+}
+
+.score, .best {
+    text-align: center;
+    background: lightgray;
+    color: white;
+    padding: 8px 22px;
+    border-radius: 8%;
+}
+
+.score h2, .best h2 {
+    margin: 4px 0 4px 0;
+    color: #828080;
+}
+
+.score span, .best span {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.best {
+    margin-left: 12%;
+}
