@@ -3,6 +3,8 @@ function ShowMatrix() {
     this.template = document.getElementById('matrixTemplate').innerHTML;
 }
 
+
+
 ShowMatrix.prototype.render = function () {
     var i, j, parentDiv = document.createElement('div'),
         attributes = this.matrixModel.attributes,
@@ -23,3 +25,4 @@ ShowMatrix.prototype.render = function () {
     parentDiv.innerHTML = tpl;
     return parentDiv;
 };
+
