@@ -1,11 +1,12 @@
 function ShowSummary() {
     this.summaryModel = new SummaryModel(2, 8);
     this.template = document.getElementById('summaryTemplate').innerHTML;
+    this.className = 'summary';
 }
 
+ShowSummary.prototype = Object.create(BaseView.prototype);
+ShowSummary.prototype.constructor = ShowSummary;
+
 ShowSummary.prototype.render = function () {
-    var div = document.createElement('div');
-    div.setAttribute('id', 'summaryText');
-    div.innerHTML = templateStr(this.template, this.summaryModel.attributes);
-    return div;
+    return templateStr(this.template, this.summaryModel.attributes);
 };

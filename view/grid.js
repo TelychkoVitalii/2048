@@ -1,17 +1,15 @@
 function ShowMatrix() {
+    this.kbdEvents = new KeyboardEvents();
     this.matrixModel = new MatrixModel();
     this.template = document.getElementById('matrixTemplate').innerHTML;
+    this.className = 'parentBlock';
 }
 
-
+ShowMatrix.prototype = Object.create(BaseView.prototype);s
+ShowMatrix.prototype.constructor = ShowMatrix;
 
 ShowMatrix.prototype.render = function () {
-    var i, j, parentDiv = document.createElement('div'),
-        attributes = this.matrixModel.attributes,
-        str = '',
-        tpl = this.template;
-
-    parentDiv.classList.add('parentBlock');
+    var i, j, attributes = this.matrixModel.attributes, str = '';
 
     for(i = 0; i < attributes.size.width; i += 1) {
         str += '<div class="row">';
@@ -20,9 +18,11 @@ ShowMatrix.prototype.render = function () {
         }
         str += '</div>';
     }
-
-    tpl = replaceFn(tpl, '{{matrix}}', str);
-    parentDiv.innerHTML = tpl;
-    return parentDiv;
+    return this.template.replace('{{matrix}}', str);
 };
 
+ShowMatrix.prototype.aftRender = function () {
+    document.addEventListener('keydown', this.kbdEvents.init.bind(this.kbdEvents), false);
+    this.newGameBtn = document.getElementById('newGame');
+    this.newGameBtn.addEventListener('click', this.kbdEvents.btnHandler.bind(this.kbdEvents), false)
+};

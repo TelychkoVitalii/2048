@@ -1,24 +1,26 @@
 function KeyboardEvents() {
-    this.keyActions = {
-        up: 38,
-        down: 40,
-        left: 37,
-        right: 39
-    }
+    this.matrixModel = new MatrixModel();
 }
 
-KeyboardEvents.prototype.moveUp = function () {
-    console.log(this.keyActions.up);
+KeyboardEvents.prototype.init = function(event) {
+    switch (event.keyCode) {
+        case 38:
+            this.matrixModel.calculateUpAction();
+            break;
+        case 40:
+            this.matrixModel.calculateDownAction();
+            break;
+        case 37:
+            this.matrixModel.calculateLeftAction();
+            break;
+        case 39:
+            this.matrixModel.calculateRightAction();
+            break;
+        default:
+            alert('Choose right keyboard!')
+    }
 };
 
-KeyboardEvents.prototype.moveDown = function () {
-
-};
-
-KeyboardEvents.prototype.moveLeft = function () {
-
-};
-
-KeyboardEvents.prototype.moveRight = function () {
-
+KeyboardEvents.prototype.btnHandler = function () {
+    console.log('click');
 };
