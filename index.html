@@ -14,8 +14,8 @@
 
 <script type="text/html" id="summaryTemplate">
     <div class="header">
-        <h1 id="gameTitle">2048</h1>
-        <div class="math">
+        <h1 id="title">2048</h1>
+        <div class="results">
             <div class="score">
                 <h2>Score</h2>
                 <span id="scoreResult">{{total}}</span>
@@ -32,18 +32,18 @@
     <div>
         {{matrix}}
     </div>
-    <div id="newGame">
+    <div id="newGameBtn">
         <h2>New Game</h2>
     </div>
 </script>
 
 <script src="utils/util.js"></script>
-<script src="controllers/keyboardActions.js"></script>
-<script src="models/matrix.js"></script>
-<script src="models/summary.js"></script>
+<script src="controllers/keyboardController.js"></script>
+<script src="models/matrixModel.js"></script>
+<script src="models/summaryModel.js"></script>
 <script src="view/baseView.js"></script>
-<script src="view/summary.js"></script>
-<script src="view/grid.js"></script>
+<script src="view/summaryView.js"></script>
+<script src="view/matrixView.js"></script>
 <script src="view/appView.js"></script>
 </body>
 </html>

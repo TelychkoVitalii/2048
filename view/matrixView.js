@@ -22,5 +22,5 @@ ShowMatrix.prototype.render = function () {
 };
 
 ShowMatrix.prototype.aftRender = function () {
-    this.kbdEvents.eventsHandler();
+    this.kbdEvents.eventsHandler.bind(this.kbdEvents);
 };

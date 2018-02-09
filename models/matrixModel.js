@@ -3,7 +3,7 @@ function MatrixModel() {
         size: { width: 4, height: 4 },
         grid: [
             [0, 0, 0, 0],
-            [0, 0, 0, 0],
+            [0, 1, 0, 0],
             [0, 0, 2, 0],
             [0, 0, 0, 0]
         ]

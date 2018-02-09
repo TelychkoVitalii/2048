@@ -4,13 +4,13 @@
     align-items: center;
 }
 
-.math {
+.results {
     display: flex;
     flex-direction: row;
     margin-left: 6%;
 }
 
-#gameTitle {
+#title {
     font-size: 5rem;
 }
 
