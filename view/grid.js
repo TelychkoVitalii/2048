@@ -5,7 +5,7 @@ function ShowMatrix() {
     this.className = 'parentBlock';
 }
 
-ShowMatrix.prototype = Object.create(BaseView.prototype);s
+ShowMatrix.prototype = Object.create(BaseView.prototype);
 ShowMatrix.prototype.constructor = ShowMatrix;
 
 ShowMatrix.prototype.render = function () {
@@ -22,7 +22,5 @@ ShowMatrix.prototype.render = function () {
 };
 
 ShowMatrix.prototype.aftRender = function () {
-    document.addEventListener('keydown', this.kbdEvents.init.bind(this.kbdEvents), false);
-    this.newGameBtn = document.getElementById('newGame');
-    this.newGameBtn.addEventListener('click', this.kbdEvents.btnHandler.bind(this.kbdEvents), false)
+    this.kbdEvents.eventsHandler();
 };

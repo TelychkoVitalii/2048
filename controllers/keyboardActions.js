@@ -2,7 +2,7 @@ function KeyboardEvents() {
     this.matrixModel = new MatrixModel();
 }
 
-KeyboardEvents.prototype.init = function(event) {
+KeyboardEvents.prototype.pressSpecialKey = function(event) {
     switch (event.keyCode) {
         case 38:
             this.matrixModel.calculateUpAction();
@@ -21,6 +21,8 @@ KeyboardEvents.prototype.init = function(event) {
     }
 };
 
-KeyboardEvents.prototype.btnHandler = function () {
-    console.log('click');
+KeyboardEvents.prototype.eventsHandler = function () {
+    document.addEventListener('keydown', this.pressSpecialKey, false);
+    // this.newGameBtn = document.getElementById('newGame');
+    // this.newGameBtn.addEventListener('click', this.kbdEvents.btnHandler.bind(this.kbdEvents), false)
 };
