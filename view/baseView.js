@@ -14,5 +14,4 @@ BaseView.prototype.show = function (element) {
 };
 
 BaseView.prototype.aftRender = function () {};
-
 BaseView.prototype.beforeRender = function () {};

@@ -1,8 +1,8 @@
 function ShowMatrix() {
-    this.kbdEvents = new KeyboardEvents();
+    this.kbdEvents = new KeyboardEvents(this.matrixModel);
     this.matrixModel = new MatrixModel();
     this.template = document.getElementById('matrixTemplate').innerHTML;
-    this.className = 'parentBlock';
+    this.className = 'table';
 }
 
 ShowMatrix.prototype = Object.create(BaseView.prototype);
