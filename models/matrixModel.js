@@ -1,4 +1,4 @@
-function MatrixModel() {
+function MatrixModel() { // create as singleton (pattern)
     this.attributes = {
         size: { width: 4, height: 4 },
         grid: [

@@ -1,6 +1,6 @@
 function ShowMatrix() {
-    this.kbdEvents = new KeyboardEvents(this.matrixModel);
     this.matrixModel = new MatrixModel();
+    this.kbdEvents = new KeyboardEvents(this.matrixModel);
     this.template = document.getElementById('matrixTemplate').innerHTML;
     this.className = 'table';
 }
