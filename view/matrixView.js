@@ -1,14 +1,15 @@
-function ShowMatrix() {
+function MatrixView() {
+    this.pubSub = new PubSub();
     this.matrixModel = new MatrixModel();
-    this.kbdEvents = new KeyboardEvents(this.matrixModel);
+    this.kbdEvents = new KeyboardEvents();
     this.template = document.getElementById('matrixTemplate').innerHTML;
     this.className = 'table';
 }
 
-ShowMatrix.prototype = Object.create(BaseView.prototype);
-ShowMatrix.prototype.constructor = ShowMatrix;
+MatrixView.prototype = Object.create(BaseView.prototype);
+MatrixView.prototype.constructor = MatrixView;
 
-ShowMatrix.prototype.render = function () {
+MatrixView.prototype.render = function () {
     var i, j, attributes = this.matrixModel.attributes, str = '';
 
     for(i = 0; i < attributes.size.width; i += 1) {
@@ -21,6 +22,10 @@ ShowMatrix.prototype.render = function () {
     return this.template.replace('{{matrix}}', str);
 };
 
-ShowMatrix.prototype.aftRender = function () {
-    this.kbdEvents.eventsHandler.bind(this.kbdEvents);
+MatrixView.prototype.aftRender = function () {
+    document.onkeydown = function (event) {
+        if(event.keyCode === 38) {
+            console.log(this.matrixModel.calcUpAction);
+        }
+    }
 };

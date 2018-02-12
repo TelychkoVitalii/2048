@@ -1,4 +1,5 @@
-function MatrixModel() { // create as singleton (pattern)
+function MatrixModel() {
+    this.pubSub = new PubSub();
     this.attributes = {
         size: { width: 4, height: 4 },
         grid: [
@@ -8,19 +9,25 @@ function MatrixModel() { // create as singleton (pattern)
             [0, 0, 0, 0]
         ]
     };
+
+    var instance = this;
+    MatrixModel = function () {
+        return instance;
+    };
 }
 
-MatrixModel.prototype = {
-    calculateUpAction: function () {
-        console.log('up');
-    },
-    calculateDownAction: function () {
-        console.log('down');
-    },
-    calculateLeftAction: function () {
-        console.log('left');
-    },
-    calculateRightAction: function () {
-        console.log('right');
-    }
+MatrixModel.prototype.calcUpAction = function () {
+    this.pubSub.publish('moveUp' , console.log('up'));
+};
+
+MatrixModel.prototype.calcDownAction = function () {
+    this.pubSub.publish('moveDown' , console.log('down'));
+};
+
+MatrixModel.prototype.calcLeftAction = function () {
+    this.pubSub.publish('moveLeft' , console.log('left'));
+};
+
+MatrixModel.prototype.calcRightAction = function () {
+    this.pubSub.publish('moveRight' , console.log('right'));
 };

@@ -1,6 +1,6 @@
 function AppView() {
-    var matrixView = new ShowMatrix();
-    var summaryView = new ShowSummary();
+    var matrixView = new MatrixView();
+    var summaryView = new SummaryView();
 
     this.render = function (selector) {
         var element = document.getElementById(selector);
