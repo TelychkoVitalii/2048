@@ -1,13 +1,18 @@
 function MatrixView() {
-    this.pubSub = new PubSub();
     this.matrixModel = new MatrixModel();
-    this.kbdEvents = new KeyboardEvents();
+    this.keaboardController = new KeyboardController();
     this.template = document.getElementById('matrixTemplate').innerHTML;
     this.className = 'table';
+    BaseView.call(this);
 }
 
 MatrixView.prototype = Object.create(BaseView.prototype);
 MatrixView.prototype.constructor = MatrixView;
+
+MatrixView.prototype.beforeRender = function () {
+    this.matrixModel.showRandomNumbers();
+    this.matrixModel.subscribe('changeData', this.reRender.bind(this));
+};
 
 MatrixView.prototype.render = function () {
     var i, j, attributes = this.matrixModel.attributes, str = '';
@@ -23,9 +28,5 @@ MatrixView.prototype.render = function () {
 };
 
 MatrixView.prototype.aftRender = function () {
-    document.onkeydown = function (event) {
-        if(event.keyCode === 38) {
-            console.log(this.matrixModel.calcUpAction);
-        }
-    }
+    document.onkeydown = this.keaboardController.eventHandler.bind(this.keaboardController);
 };

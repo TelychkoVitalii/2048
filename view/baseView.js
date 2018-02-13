@@ -1,16 +1,23 @@
-function BaseView() {}
+function BaseView() {
+    this.rootElement = document.createElement('div');
+}
 
 BaseView.prototype.show = function (element) {
     this.beforeRender();
 
-    var div = document.createElement('div');
+    this.rootElement.innerHTML = this.render();
+    this.rootElement.classList.add(this.className);
 
-    div.innerHTML = this.render();
-    div.classList.add(this.className);
-
-    element.appendChild(div);
+    element.appendChild(this.rootElement);
 
     this.aftRender();
+};
+
+BaseView.prototype.beforeUpdate = function () {};
+
+BaseView.prototype.reRender = function () {
+    this.beforeUpdate();
+    this.rootElement.innerHTML = this.render();
 };
 
 BaseView.prototype.aftRender = function () {};

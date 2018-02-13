@@ -1,16 +1,22 @@
-function KeyboardEvents() {
-    this.pubSub = new PubSub();
+function KeyboardController() {
     this.matrixModel = new MatrixModel();
 }
 
-KeyboardEvents.prototype.eventHandler = function () {
-    this.pubSub.subscribe('moveUp', this.matrixModel.calcUpAction, this.matrixModel);
-    this.pubSub.subscribe('moveDown', this.matrixModel.calcDownAction);
-    this.pubSub.subscribe('moveLeft', this.matrixModel.calcLeftAction);
-    this.pubSub.subscribe('moveRight', this.matrixModel.calcRightAction);
+KeyboardController.prototype.eventHandler = function (event) {
+    switch (event.keyCode) {
+        case 38:
+            this.matrixModel.calcUpAction();
+            break;
+        case 40:
+            this.matrixModel.calcDownAction();
+            break;
+        case 37:
+            this.matrixModel.calcLeftAction();
+            break;
+        case 39:
+            this.matrixModel.calcRightAction();
+            break;
+        default:
+            alert('Please, use arrow keys on your keaboard!');
+    }
 };
-
-
-// document.addEventListener('keydown', event, false);
-// this.newGameBtn = document.getElementById('newGame');
-// this.newGameBtn.addEventListener('click', this.kbdEvents.btnHandler.bind(this.kbdEvents), false)

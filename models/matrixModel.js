@@ -1,12 +1,12 @@
 function MatrixModel() {
-    this.pubSub = new PubSub();
+    this.startQuantity = 2;
     this.attributes = {
         size: { width: 4, height: 4 },
         grid: [
-            [0, 0, 0, 0],
-            [0, 1, 0, 0],
-            [0, 0, 2, 0],
-            [0, 0, 0, 0]
+            ['', '', '', ''],
+            ['', '', '', ''],
+            ['', '', '', ''],
+            ['', '', '', '']
         ]
     };
 
@@ -16,18 +16,30 @@ function MatrixModel() {
     };
 }
 
+MatrixModel.prototype = new PubSub();
+MatrixModel.prototype.constructor = MatrixModel;
+
+MatrixModel.prototype.showRandomNumbers = function () {
+    var randomGridIteration = Math.floor(Math.random() * 4), i,
+        randomData = this.attributes.grid[randomGridIteration][randomGridIteration];
+    for(i = 0; i < this.startQuantity; i += 1) {
+        this.attributes.grid[randomGridIteration][randomGridIteration] = Math.random() < 0.6 ? 2 : 4;
+    }
+    this.publish('changeData');
+};
+
 MatrixModel.prototype.calcUpAction = function () {
-    this.pubSub.publish('moveUp' , console.log('up'));
+    this.publish('changeData');
 };
 
 MatrixModel.prototype.calcDownAction = function () {
-    this.pubSub.publish('moveDown' , console.log('down'));
+    this.publish('changeData');
 };
 
 MatrixModel.prototype.calcLeftAction = function () {
-    this.pubSub.publish('moveLeft' , console.log('left'));
+    this.publish('changeData');
 };
 
 MatrixModel.prototype.calcRightAction = function () {
-    this.pubSub.publish('moveRight' , console.log('right'));
+    this.publish('changeData');
 };
