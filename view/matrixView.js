@@ -10,8 +10,7 @@ MatrixView.prototype = Object.create(BaseView.prototype);
 MatrixView.prototype.constructor = MatrixView;
 
 MatrixView.prototype.beforeRender = function () {
-    this.matrixModel.showRandomNumbers();
-    this.matrixModel.subscribe('changeData', this.reRender.bind(this));
+    this.matrixModel.subscribe('changeData', this.reRender, this);
 };
 
 MatrixView.prototype.render = function () {
@@ -28,5 +27,5 @@ MatrixView.prototype.render = function () {
 };
 
 MatrixView.prototype.aftRender = function () {
-    document.onkeydown = this.keaboardController.eventHandler.bind(this.keaboardController);
+    document.onkeydown = this.keaboardController.onKeyPress.bind(this.keaboardController);
 };

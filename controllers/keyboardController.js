@@ -2,7 +2,7 @@ function KeyboardController() {
     this.matrixModel = new MatrixModel();
 }
 
-KeyboardController.prototype.eventHandler = function (event) {
+KeyboardController.prototype.onKeyPress = function (event) {
     switch (event.keyCode) {
         case 38:
             this.matrixModel.calcUpAction();

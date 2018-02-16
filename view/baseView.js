@@ -13,6 +13,10 @@ BaseView.prototype.show = function (element) {
     this.aftRender();
 };
 
+BaseView.prototype.render = function () {
+    throw new Error('Need to override render method');
+};
+
 BaseView.prototype.beforeUpdate = function () {};
 
 BaseView.prototype.reRender = function () {
