@@ -3,11 +3,13 @@ function MatrixModel() {
     this.randomGridIteration = Math.floor(Math.random() * 4);
     this.attributes = {
         size: { width: 4, height: 4 },
-        grid: [
-            [4, 2, '', 2],
-            ['', '', '', ''],
-            ['', '', '', ''],
-            ['', '', '', '']
+        grid:
+        // JSON.parse(localStorage.getItem('matrix')) ||
+        [
+            [2, '', '', 2],
+            ['', 4, 4, ''],
+            [2, '', 4, 2],
+            ['', 2, 4, 4]
         ]
     };
 
@@ -16,13 +18,14 @@ function MatrixModel() {
         return instance;
     };
 
-    this.init();
+    this.fillMatrixCell();
 }
 
 MatrixModel.prototype = new PubSub();
 MatrixModel.prototype.constructor = MatrixModel;
 
-MatrixModel.prototype.init = function () {
+MatrixModel.prototype.fillMatrixCell = function () {
+    console.log(this.attributes.grid);
     // var lastArray = this.attributes.grid[3],
     //     randomNumbers = Math.random() < 0.4 ? 2 : 4;
     // this.attributes.grid[this.randomGridIteration][this.randomGridIteration] = this.staticDigit;
@@ -33,23 +36,30 @@ MatrixModel.prototype.init = function () {
     // }
 };
 
-MatrixModel.prototype.moveElements = function (matrix) {
-    var i, j, len = matrix.length, newArr = [];
-    for(i = 0; i < len; i += 1) {
-        for(j = 0; j < matrix[i].length; j += 1) {
-            console.log(matrix[i][j]);
-            if (matrix[i][j] === matrix[i][j + 1]) {
-                matrix[i][j] = matrix[i][j] * 2;
-                matrix[i][j] = '';
-            }
-        }
-    }
+MatrixModel.prototype.moveElements = function () {
+    var i, j, k, matrix = this.attributes.grid, len, innerLength;
 
+    // for(i = 0, len = matrix.length; i < len; i += 1) {
+    //     for(k = 0, innerLength = matrix[i].length; k < innerLength; k += 1) {
+    //         if (typeof matrix[i][k] !== 'number') {
+    //             matrix[i].push(matrix[i][k]);
+    //             matrix[i].splice(matrix[i].indexOf(matrix[i][k]), 1);
+    //         }
+    //     }
+    //     for(j = 0, innerLength = matrix[i].length; j < innerLength; j += 1) {
+    //         if(matrix[i][j] === matrix[i][j + 1] && (typeof matrix[i][j] && matrix[i][j + 1]) !== 'string') {
+    //             matrix[i][j] *= 2;
+    //             matrix[i].splice(j + 1, 1);
+    //             if(isNaN(matrix[i][j]) || matrix[i][j] === 0) matrix[i][j]= '';
+    //         }
+    //     }
+    // }
 
+    // localStorage.setItem('matrix', JSON.stringify(matrix));
     console.log(matrix);
     return matrix;
 };
-// matrix[i].splice(new_index, 0, matrix[i].splice(old_index, 1))
+
 MatrixModel.prototype.calcUpAction = function () {
     this.publish('changeData');
 };
@@ -59,10 +69,11 @@ MatrixModel.prototype.calcDownAction = function () {
 };
 
 MatrixModel.prototype.calcLeftAction = function () {
-    this.moveElements(this.attributes.grid);
+    // this.moveElements();
     this.publish('changeData');
 };
 
 MatrixModel.prototype.calcRightAction = function () {
+    this.moveElements();
     this.publish('changeData');
 };
