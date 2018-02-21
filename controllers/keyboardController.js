@@ -3,20 +3,26 @@ function KeyboardController() {
 }
 
 KeyboardController.prototype.onKeyPress = function (event) {
+    var key;
     switch (event.keyCode) {
         case 38:
-            this.matrixModel.calcUpAction();
+            key = 'up';
             break;
         case 40:
-            this.matrixModel.calcDownAction();
+            key = 'down';
             break;
         case 37:
-            this.matrixModel.calcLeftAction();
+            key = 'left';
             break;
         case 39:
-            this.matrixModel.calcRightAction();
+            key = 'right';
             break;
         default:
-            alert('Please, use arrow keys on your keaboard!');
+            console.log('Please, use arrow keys on your keyboard!');
     }
+    this.matrixModel.displayActionResult(key);
+};
+
+KeyboardController.prototype.startNewGame = function () {
+   console.log('start');
 };

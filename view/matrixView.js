@@ -2,6 +2,7 @@ function MatrixView() {
     this.matrixModel = new MatrixModel();
     this.keaboardController = new KeyboardController();
     this.template = document.getElementById('matrixTemplate').innerHTML;
+    // this.newGameButton = document.getElementById('newGameBtn');
     this.className = 'table';
     BaseView.call(this);
 }
@@ -28,4 +29,5 @@ MatrixView.prototype.render = function () {
 
 MatrixView.prototype.aftRender = function () {
     document.onkeydown = this.keaboardController.onKeyPress.bind(this.keaboardController);
+    // this.newGameButton.onclick = this.keaboardController.startNewGame.bind(this.keaboardController);
 };

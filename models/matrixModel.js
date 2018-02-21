@@ -6,10 +6,10 @@ function MatrixModel() {
         grid:
         // JSON.parse(localStorage.getItem('matrix')) ||
         [
-            ['', '', '', 2],
-            ['', 2, '', 2],
-            [4, 2, 2, 4],
-            [4, '', 4, '']
+            ['', '', 2, 4],
+            ['', '', 4, 2],
+            ['', '', 2, 4],
+            ['', '', 4, 2]
         ]
     };
 
@@ -25,93 +25,99 @@ MatrixModel.prototype = new PubSub();
 MatrixModel.prototype.constructor = MatrixModel;
 
 MatrixModel.prototype.fillMatrixCell = function () {
-    console.log(this.attributes.grid);
-    // var lastArray = this.attributes.grid[3],
-    //     randomNumbers = Math.random() < 0.4 ? 2 : 4;
+    var matrix = this.attributes.grid, lastArray = this.attributes.grid[3],
+        randomNumbers = Math.random() < 0.6 ? 2 : 4,
+        arr = [].concat.apply([], matrix);
+    if(arr.includes('')) {
+        // arr[Math.floor(Math.random() * arr.length)] = randomNumbers;
+    }
+    // for(var i = 0; i < arr.length; i += 1) {
+    //     if(typeof arr[i] !== 'number') {
+    //         arr[i] = randomNumbers;
+    //         // console.log(a);
+    //     }
+    // }
+
+    // arr[Math.floor(Math.random() * arr.length)] = randomNumbers;
+    console.log(arr);
+
+    // console.log(matrix);
+    // matrix[this.randomGridIteration][this.randomGridIteration] = randomNumbers;
+    // console.log(a);
     // this.attributes.grid[this.randomGridIteration][this.randomGridIteration] = this.staticDigit;
     // this.attributes.grid[this.randomGridIteration][this.randomGridIteration + 1] = randomNumbers;
-    // if(lastArray.length === 5) {
+    // if (lastArray.length === 5) {
     //     lastArray.pop();
     //     this.attributes.grid[this.randomGridIteration][this.randomGridIteration - 2] = randomNumbers;
     // }
 };
 
-MatrixModel.prototype.moveElements = function () {
-    // var i, j, k, matrix = this.attributes.grid, len, innerLength;
-    //
-    // for(i = 0, len = matrix.length; i < len; i += 1) {
-    //     for(k = 0, innerLength = matrix[i].length; k < innerLength; k += 1) {
-    //         if (typeof matrix[i][k] !== 'number') {
-    //             matrix[i].push(matrix[i].splice(matrix[i].indexOf(matrix[i][k]), 1)[0]);
-    //         }
-    //     }
-    //     for(j = 0, innerLength = matrix[i].length; j < innerLength; j += 1) {
-    //         if(matrix[i][j] === matrix[i][j + 1] && (typeof matrix[i][j] && matrix[i][j + 1]) !== 'string') {
-    //             matrix[i][j] *= 2;
-    //             matrix[i].splice(j + 1, 1);
-    //             if(isNaN(matrix[i][j]) || matrix[i][j] === 0) matrix[i][j] = '';
-    //         }
-    //     }
-    // }
+MatrixModel.prototype.transformToColumn = function (matrix, columns, matrixLength) {
+    var i, j;
+    for (i = 0; i < matrixLength; i += 1) {
+        for(j = 0; j < 4; j += 1) {
+            columns[j].push(matrix[i][j]);
+        }
+    }
+};
 
+MatrixModel.prototype.transformToMatrix = function (matrix, columns, columnsLength) {
+    var i, j;
+    for (i = 0; i < columnsLength; i += 1) {
+        for(j = 0; j < 4; j += 1) {
+            matrix[j].push(columns[i][j]);
+            matrix[j].shift();
+        }
+    }
+};
+
+MatrixModel.prototype.moveElements = function (elements, i, innerLength, key) {
+    var k;
+    for(k = 0; k < innerLength; k += 1) {
+        if (typeof elements[i][k] !== 'number') {
+            (key === 'up' || key === 'left') ?
+                elements[i].push(elements[i].splice(elements[i].indexOf(elements[i][k]), 1)[0]):
+                elements[i].unshift(elements[i].splice(k, 1)[0]);
+        }
+    }
+};
+
+MatrixModel.prototype.calculateValue = function (values, i, innerLength, key) {
+    var j;
+    for(j = 0; j < innerLength; j += 1) {
+        if(values[i][j] === values[i][j + 1] && (typeof values[i][j] && values[i][j + 1]) !== 'string') {
+            values[i][j] *= 2;
+            if(values[i][j] === 0) values[i][j] = '';
+            values[i].splice(j + 1, 1);
+            if(key === 'down' || key === 'right') values[i].unshift('');
+            if(isNaN(values[i][j])) values[i][j] = '';
+        }
+    }
+};
+
+MatrixModel.prototype.displayActionResult = function (key) {
+    var i, matrix = this.attributes.grid,
+        matrixLength = matrix.length,
+        columns = [[], [], [], []],
+        columnsLength = columns.length;
+
+    if(key === 'up' || key === 'down') {
+        this.transformToColumn(matrix, columns, matrixLength);
+
+        for(i = 0; i < columnsLength; i += 1) {
+            this.moveElements(columns, i, columns[i].length, key);
+            this.calculateValue(columns, i, columns[i].length, key);
+        }
+
+        this.transformToMatrix(matrix, columns, columnsLength);
+    } else {
+        for(i = 0; i < matrixLength; i += 1) {
+            this.moveElements(matrix, i, matrix[i].length, key);
+            this.calculateValue(matrix, i, matrix[i].length, key);
+        }
+    }
+
+    this.publish('changeData');
     // localStorage.setItem('matrix', JSON.stringify(matrix));
-    // console.log(matrix);
-    // return matrix;
-};
-
-MatrixModel.prototype.calcUpAction = function () {
-    this.publish('changeData');
-};
-
-MatrixModel.prototype.calcDownAction = function () {
-    this.publish('changeData');
-};
-
-MatrixModel.prototype.calcLeftAction = function () {
-    var i, j, k, matrix = this.attributes.grid, len, innerLength;
-
-    for(i = 0, len = matrix.length; i < len; i += 1) {
-        for(k = 0, innerLength = matrix[i].length; k < innerLength; k += 1) {
-            if (typeof matrix[i][k] !== 'number') {
-                matrix[i].push(matrix[i].splice(matrix[i].indexOf(matrix[i][k]), 1)[0]);
-            }
-        }
-        for(j = 0, innerLength = matrix[i].length; j < innerLength; j += 1) {
-            if(matrix[i][j] === matrix[i][j + 1] && (typeof matrix[i][j] && matrix[i][j + 1]) !== 'string') {
-                matrix[i][j] *= 2;
-                matrix[i].splice(j + 1, 1);
-                if(isNaN(matrix[i][j]) || matrix[i][j] === 0) matrix[i][j] = '';
-            }
-        }
-    }
-    console.log(matrix);
-    this.publish('changeData');
-    return matrix;
-};
-
-MatrixModel.prototype.calcRightAction = function () {
-    var i, j, k, matrix = this.attributes.grid, len, innerLength;
-
-    for(i = 0, len = matrix.length; i < len; i += 1) {
-        for (k = 0, len = matrix[i].length; k < len; k += 1) {
-            if (typeof matrix[i][k] !== 'number') {
-                matrix[i].unshift(matrix[i].splice(k, 1)[0]);
-            }
-        }
-
-        for (innerLength = matrix[i].length - 1, j = innerLength; j >= 1; j -= 1) {
-            if (matrix[i][j] === matrix[i][j + 1] && (typeof matrix[i][j] && matrix[i][j + 1]) !== 'string') {
-                matrix[i][j] *= 2;
-                if(matrix[i][j] === 0) {
-                    matrix[i][j] = '';
-                }
-                matrix[i].splice(j + 1, 1);
-                matrix[i].unshift('');
-                if (isNaN(matrix[i][j]) || matrix[i][j] === 0) matrix[i][j] = '';
-            }
-        }
-    }
-    console.log(matrix);
-    this.publish('changeData');
     return matrix;
 };

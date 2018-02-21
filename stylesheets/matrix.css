@@ -13,10 +13,10 @@
     width: 120px;
     height: 120px;
     vertical-align: middle;
-    border: 12px solid #928e8e;
-    background-color: #eee4da;
+    border: 12px solid #a3a0a0;
+    background: rgba(238, 228, 218, 0.35);
     text-align: center;
-    color: #4c4c4c;
+    color: #776e65;
     font-size: 4em;
     font-weight: 600;
 }
