@@ -27,20 +27,38 @@ MatrixModel.prototype.constructor = MatrixModel;
 MatrixModel.prototype.fillMatrixCell = function () {
     var matrix = this.attributes.grid, lastArray = this.attributes.grid[3],
         randomNumbers = Math.random() < 0.6 ? 2 : 4,
-        arr = [].concat.apply([], matrix);
-    if(arr.includes('')) {
-        // arr[Math.floor(Math.random() * arr.length)] = randomNumbers;
+        arr = [].concat.apply([], matrix), emptyArray = [], newArr = new Array(arr.length);
+
+    for(var i = 0; i < matrix.length; i += 1) {
+        if(matrix[i].includes('')) {
+            for(var j = 0; j < matrix[i].length; j += 1) {
+                if(matrix[i][j] !== 'number') {
+                    matrix[this.randomGridIteration][this.randomGridIteration] = randomNumbers;
+                }
+            }
+        }
     }
-    // for(var i = 0; i < arr.length; i += 1) {
-    //     if(typeof arr[i] !== 'number') {
-    //         arr[i] = randomNumbers;
-    //         // console.log(a);
+
+
+console.log(matrix);
+
+
+
+    // for(var i = 0; i < newArr.length; i += 1) {
+    //     for(var k = 0; k < arr.length; k += 1) {
+    //         if (typeof arr[k] === 'number') {
+    //             newArr[k] = arr[k]
+    //         }
     //     }
     // }
-
-    // arr[Math.floor(Math.random() * arr.length)] = randomNumbers;
-    console.log(arr);
-
+    //
+    // emptyArray[Math.floor(Math.random() * emptyArray.length)] = randomNumbers;
+    // for(var j = 0; j < newArr.length; j += 1) {
+    //     if(typeof newArr[j] !== 'number') {
+    //         newArr[Math.floor(Math.random() * newArr.length)] = +emptyArray.join('')
+    //     }
+    // }
+    // console.log(newArr);
     // console.log(matrix);
     // matrix[this.randomGridIteration][this.randomGridIteration] = randomNumbers;
     // console.log(a);
