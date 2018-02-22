@@ -6,6 +6,7 @@
 
 .row {
     display: table-row;
+    background: rgba(234, 221, 175, 0.5);
 }
 
 .cell {
@@ -14,9 +15,44 @@
     height: 120px;
     vertical-align: middle;
     border: 12px solid #a3a0a0;
-    background: rgba(238, 228, 218, 0.35);
     text-align: center;
     color: #776e65;
     font-size: 4em;
     font-weight: 600;
+    /*animation: appear 200ms ease 100ms;*/
+}
+
+.addCell {
+    animation: pop 200ms ease 100ms;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0);
+        -moz-transform: scale(0);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+    }
+}
+
+@keyframes pop {
+    0% {
+        -webkit-transform: scale(0);
+        -moz-transform: scale(0);
+    }
+
+    50% {
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+    }
 }

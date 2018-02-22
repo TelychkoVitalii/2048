@@ -1,5 +1,6 @@
 function KeyboardController() {
     this.matrixModel = new MatrixModel();
+    this.summaryModel = new SummaryModel();
 }
 
 KeyboardController.prototype.onKeyPress = function (event) {
@@ -20,9 +21,10 @@ KeyboardController.prototype.onKeyPress = function (event) {
         default:
             console.log('Please, use arrow keys on your keyboard!');
     }
-    this.matrixModel.displayActionResult(key);
+    var total = this.matrixModel.displayActionResult(key);
+    this.summaryModel.countTotalScore(total);
 };
 
-KeyboardController.prototype.startNewGame = function () {
-   console.log('start');
+KeyboardController.prototype.onClickNewGame = function () {
+    this.matrixModel.startNewGame();
 };
