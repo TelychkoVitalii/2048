@@ -22,7 +22,7 @@ function MatrixModel() {
     !localStorage.getItem('matrix') && this.fillMatrixCell(true);
 }
 
-MatrixModel.prototype = new BaseModel();
+MatrixModel.prototype = Object.create(BaseModel.prototype);
 MatrixModel.prototype.constructor = MatrixModel;
 
 MatrixModel.prototype.reset = function () {
@@ -35,6 +35,7 @@ MatrixModel.prototype.reset = function () {
 
 MatrixModel.prototype.startNewGame = function () {
     localStorage.removeItem('matrix');
+    console.log('hello');
     this.reset();
     this.fillMatrixCell(true);
     this.publish('changeData');
@@ -101,7 +102,7 @@ MatrixModel.prototype.moveElements = function (elements, i, innerLength, key) {
 };
 
 MatrixModel.prototype.calculateValue = function (values, i, innerLength, key) {
-    var j, cell = document.querySelector('.cell'), result = 0;
+    var j, result = 0;
     for(j = 0; j < innerLength; j += 1) {
         if(values[i][j] === values[i][j + 1] && (typeof values[i][j] && values[i][j + 1]) !== 'string') {
             values[i][j] *= 2;
@@ -124,21 +125,26 @@ MatrixModel.prototype.displayActionResult = function (key) {
         columnsLength = columns.length, result;
 
     if(key === 'up' || key === 'down') {
-        this.transformToColumn(matrix, columns, matrixLength);
 
+        this.transformToColumn(matrix, columns, matrixLength);
         for(i = 0; i < columnsLength; i += 1) {
             this.moveElements(columns, i, columns[i].length, key);
-            result = this.calculateValue(columns, i, columns[i].length, key);
+            this.calculateValue(columns, i, columns[i].length, key);
         }
-
         this.transformToMatrix(matrix, columns, columnsLength);
+
     } else {
         for(i = 0; i < matrixLength; i += 1) {
             this.moveElements(matrix, i, matrix[i].length, key);
-            result = this.calculateValue(matrix, i, matrix[i].length, key);
+            this.calculateValue(matrix, i, matrix[i].length, key)
         }
     }
     this.fillMatrixCell();
     this.publish('changeData');
-    return result;
+    if(typeof result !== 'undefined') {
+        console.log(result);
+        return result;
+    } else {
+        return 0;
+    }
 };

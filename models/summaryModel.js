@@ -11,11 +11,11 @@ function SummaryModel() {
     };
 }
 
-SummaryModel.prototype = new BaseModel();
+SummaryModel.prototype = Object.create(BaseModel.prototype);
 SummaryModel.prototype.constructor = SummaryModel;
 
 SummaryModel.prototype.countTotalScore = function (total) {
-    this.attributes.total = total;
+    this.attributes.total += total;
     this.publish('changeData');
 };
 

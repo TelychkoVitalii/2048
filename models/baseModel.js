@@ -1,4 +1,5 @@
 function BaseModel() {
+    PubSub.call(this);
 }
 
 BaseModel.prototype = new PubSub();

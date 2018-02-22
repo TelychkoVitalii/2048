@@ -22,6 +22,7 @@ KeyboardController.prototype.onKeyPress = function (event) {
             return false;
     }
     var total = this.matrixModel.displayActionResult(key);
+    console.log(total);
     this.summaryModel.countTotalScore(total);
 };
 

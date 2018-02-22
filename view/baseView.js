@@ -25,7 +25,7 @@ BaseView.prototype.reRender = function () {
     this.aftUpdate();
 };
 
-BaseView.prototype.aftUpdate = function () {};
+BaseView.prototype.aftUpdate = function () {}
 
 BaseView.prototype.aftRender = function () {};
 BaseView.prototype.beforeRender = function () {};
