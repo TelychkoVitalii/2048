@@ -19,7 +19,7 @@ KeyboardController.prototype.onKeyPress = function (event) {
             key = 'right';
             break;
         default:
-            console.log('Please, use arrow keys on your keyboard!');
+            return false;
     }
     var total = this.matrixModel.displayActionResult(key);
     this.summaryModel.countTotalScore(total);

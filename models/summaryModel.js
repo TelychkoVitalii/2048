@@ -1,9 +1,14 @@
-function SummaryModel(total, best) {
-    this.attributes = {
-        total: total,
-        best: best
-    };
+function SummaryModel() {
     BaseModel.call(this);
+    this.attributes = {
+        total: 0,
+        best: 0
+    };
+
+    var instance = this;
+    SummaryModel = function () {
+        return instance;
+    };
 }
 
 SummaryModel.prototype = new BaseModel();

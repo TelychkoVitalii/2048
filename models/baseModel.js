@@ -1,5 +1,4 @@
 function BaseModel() {
-
 }
 
 BaseModel.prototype = new PubSub();

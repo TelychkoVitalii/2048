@@ -27,7 +27,7 @@ MatrixView.prototype.render = function () {
 };
 
 MatrixView.prototype.aftRender = function () {
-    var newGameButton = document.getElementById('newGameBtn');
     document.onkeydown = this.keaboardController.onKeyPress.bind(this.keaboardController);
-    newGameButton.onclick = this.keaboardController.onClickNewGame.bind(this.keaboardController);
+    var newGameButton = document.getElementById('newGameBtn');
+    newGameButton.addEventListener('click', this.keaboardController.onClickNewGame.bind(this.keaboardController));
 };

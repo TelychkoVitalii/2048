@@ -1,4 +1,5 @@
 function MatrixModel() {
+    BaseModel.call(this);
     this.staticDigit = 2;
     this.randomGridIteration = Math.floor(Math.random() * 4);
     this.randomNumber = Math.random() < 0.8 ? 2 : 4;
@@ -18,9 +19,7 @@ function MatrixModel() {
         return instance;
     };
 
-    !localStorage.length && this.fillMatrixCell(true);
-
-    BaseModel.call(this);
+    !localStorage.getItem('matrix') && this.fillMatrixCell(true);
 }
 
 MatrixModel.prototype = new BaseModel();
@@ -37,7 +36,7 @@ MatrixModel.prototype.reset = function () {
 MatrixModel.prototype.startNewGame = function () {
     localStorage.removeItem('matrix');
     this.reset();
-    !localStorage.length && this.fillMatrixCell(true);
+    this.fillMatrixCell(true);
     this.publish('changeData');
 };
 
@@ -63,7 +62,6 @@ MatrixModel.prototype.fillRandomNumbersOnInit = function (lastArray) {
         lastArray.pop();
         this.attributes.grid[this.randomGridIteration][this.randomGridIteration - 2] = this.randomNumber;
     }
-    localStorage.setItem('matrix', JSON.stringify(this.attributes.grid));
 };
 
 MatrixModel.prototype.fillMatrixCell = function (needed) {
@@ -102,7 +100,7 @@ MatrixModel.prototype.moveElements = function (elements, i, innerLength, key) {
     }
 };
 
-MatrixModel.prototype.calculateValue = function (values, i, innerLength, key, total) {
+MatrixModel.prototype.calculateValue = function (values, i, innerLength, key) {
     var j, cell = document.querySelector('.cell'), result = 0;
     for(j = 0; j < innerLength; j += 1) {
         if(values[i][j] === values[i][j + 1] && (typeof values[i][j] && values[i][j + 1]) !== 'string') {
@@ -112,32 +110,35 @@ MatrixModel.prototype.calculateValue = function (values, i, innerLength, key, to
             if(key === 'down' || key === 'right') values[i].unshift('');
             if(isNaN(values[i][j])) values[i][j] = '';
             result += +values[i][j];
-            total = result;
         }
+    }
+    if(result !== 0 && typeof result !== 'undefined') {
+        return result;
     }
 };
 
-MatrixModel.prototype.displayActionResult = function (key, total) {
+MatrixModel.prototype.displayActionResult = function (key) {
     var i, matrix = this.attributes.grid,
         matrixLength = matrix.length,
         columns = [[], [], [], []],
-        columnsLength = columns.length;
+        columnsLength = columns.length, result;
 
     if(key === 'up' || key === 'down') {
         this.transformToColumn(matrix, columns, matrixLength);
 
         for(i = 0; i < columnsLength; i += 1) {
             this.moveElements(columns, i, columns[i].length, key);
-            this.calculateValue(columns, i, columns[i].length, key, total);
+            result = this.calculateValue(columns, i, columns[i].length, key);
         }
 
         this.transformToMatrix(matrix, columns, columnsLength);
     } else {
         for(i = 0; i < matrixLength; i += 1) {
             this.moveElements(matrix, i, matrix[i].length, key);
-            this.calculateValue(matrix, i, matrix[i].length, key, total);
+            result = this.calculateValue(matrix, i, matrix[i].length, key);
         }
     }
     this.fillMatrixCell();
     this.publish('changeData');
+    return result;
 };
