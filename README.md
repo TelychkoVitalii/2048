@@ -1,3 +1,4 @@
+
 **How to play**
 
 Use the direction keys to control the direction of movement of blocks.
