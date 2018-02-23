@@ -7,10 +7,10 @@ function MatrixModel() {
         size: { width: 4, height: 4 },
         grid:
         JSON.parse(localStorage.getItem('matrix')) || [
-            [1, 5, 8, 2048],
-            [2, 6, 7, 2],
-            [3, 7, 2, 3],
-            [4, 1, 2, 1]
+            ['', '', '', ''],
+            ['', '', '', ''],
+            ['', '', '', ''],
+            ['', '', '', '']
         ]
     };
 
