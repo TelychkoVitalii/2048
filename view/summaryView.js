@@ -15,3 +15,18 @@ SummaryView.prototype.beforeRender = function () {
 SummaryView.prototype.render = function () {
     return templateStr(this.template, this.summaryModel.attributes);
 };
+
+SummaryView.prototype.aftRender = function () {
+    var scoreResult = document.getElementById('scoreResult'),
+        addition = document.createElement('div');
+    scoreResult.appendChild(addition);
+    if(JSON.parse(localStorage.getItem('addition')) === (0 && null)) {
+        return;
+    } else {
+        addition.innerHTML = '+ ' + JSON.parse(localStorage.getItem('addition'));
+        addition.classList.add('scoreAddition');
+    }
+    setTimeout(function () {
+        addition.style.display = 'none'
+    }, 600)
+};

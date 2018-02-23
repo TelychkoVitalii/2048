@@ -7,6 +7,7 @@ body {
 
 #newGameBtn {
     width: 200px;
+    height: 70px;
     margin: 30px auto 0 auto;
     text-align: center;
     background: lightgray;
@@ -14,4 +15,10 @@ body {
     padding: 3px 10px;
     cursor: pointer;
     user-select: none;
+    transition: all 0.5s ease;
+}
+
+#newGameBtn:hover {
+    background-color: #ffc107;
+    font-size: 17px;
 }

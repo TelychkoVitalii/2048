@@ -22,10 +22,10 @@ BaseView.prototype.beforeUpdate = function () {};
 BaseView.prototype.reRender = function () {
     this.beforeUpdate();
     this.rootElement.innerHTML = this.render();
-    this.aftUpdate();
+    this.aftRender();
 };
 
-BaseView.prototype.aftUpdate = function () {}
+BaseView.prototype.aftUpdate = function () {};
 
 BaseView.prototype.aftRender = function () {};
 BaseView.prototype.beforeRender = function () {};

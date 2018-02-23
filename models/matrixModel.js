@@ -35,7 +35,6 @@ MatrixModel.prototype.reset = function () {
 
 MatrixModel.prototype.startNewGame = function () {
     localStorage.removeItem('matrix');
-    console.log('hello');
     this.reset();
     this.fillMatrixCell(true);
     this.publish('changeData');
@@ -115,6 +114,8 @@ MatrixModel.prototype.calculateValue = function (values, i, innerLength, key) {
     }
     if(result !== 0 && typeof result !== 'undefined') {
         return result;
+    } else {
+        return 0;
     }
 };
 
@@ -122,29 +123,24 @@ MatrixModel.prototype.displayActionResult = function (key) {
     var i, matrix = this.attributes.grid,
         matrixLength = matrix.length,
         columns = [[], [], [], []],
-        columnsLength = columns.length, result;
+        columnsLength = columns.length, result = 0;
 
     if(key === 'up' || key === 'down') {
 
         this.transformToColumn(matrix, columns, matrixLength);
         for(i = 0; i < columnsLength; i += 1) {
             this.moveElements(columns, i, columns[i].length, key);
-            this.calculateValue(columns, i, columns[i].length, key);
+            result += this.calculateValue(columns, i, columns[i].length, key);
         }
         this.transformToMatrix(matrix, columns, columnsLength);
 
     } else {
         for(i = 0; i < matrixLength; i += 1) {
             this.moveElements(matrix, i, matrix[i].length, key);
-            this.calculateValue(matrix, i, matrix[i].length, key)
+            result += this.calculateValue(matrix, i, matrix[i].length, key)
         }
     }
     this.fillMatrixCell();
     this.publish('changeData');
-    if(typeof result !== 'undefined') {
-        console.log(result);
-        return result;
-    } else {
-        return 0;
-    }
+    return result;
 };

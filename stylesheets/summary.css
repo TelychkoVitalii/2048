@@ -15,6 +15,7 @@
 }
 
 .score, .best {
+    position: relative;
     text-align: center;
     background: lightgray;
     color: white;
@@ -27,11 +28,31 @@
     color: #828080;
 }
 
-.score span, .best span {
+.score div, .best div {
     font-size: 20px;
     font-weight: 600;
 }
 
 .best {
     margin-left: 12%;
+}
+
+.scoreAddition {
+    position: absolute;
+    top: -25px;
+    left: 37px;
+    color: #655e5e;
+    animation: move-up 600ms ease-in;
+}
+
+@keyframes move-up {
+    0% {
+        top: 25px;
+        opacity: 1;
+    }
+
+    100% {
+        top: -50px;
+        opacity: 0;
+    }
 }
