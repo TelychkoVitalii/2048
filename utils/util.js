@@ -6,5 +6,3 @@ function templateStr(tplString, attributes) {
     }
     return tplString;
 }
-
-// templateStr(' my str {{ item[0][1] }} text {{ name }}', {name: 'qwe', item: [[2, 5], [3]] }); /// my str 5 text qwe
