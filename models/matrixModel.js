@@ -7,10 +7,10 @@ function MatrixModel() {
         size: { width: 4, height: 4 },
         grid:
         JSON.parse(localStorage.getItem('matrix')) || [
-            ['', '', '', ''],
-            ['', '', '', ''],
-            ['', '', '', ''],
-            ['', '', '', '']
+            [1, 5, 8, 2048],
+            [2, 6, 7, 2],
+            [3, 7, 2, 3],
+            [4, 1, 2, 1]
         ]
     };
 
@@ -97,6 +97,9 @@ MatrixModel.prototype.moveElements = function (elements, i, innerLength, key) {
                 elements[i].push(elements[i].splice(elements[i].indexOf(elements[i][k]), 1)[0]):
                 elements[i].unshift(elements[i].splice(k, 1)[0]);
         }
+        if(elements[i][k] === 2048) {
+            alert('winner');
+        }
     }
 };
 
@@ -112,6 +115,7 @@ MatrixModel.prototype.calculateValue = function (values, i, innerLength, key) {
             result += +values[i][j];
         }
     }
+
     if(result !== 0 && typeof result !== 'undefined') {
         return result;
     } else {
