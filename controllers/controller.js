@@ -1,9 +1,9 @@
-function KeyboardController() {
+function Controller() {
     this.matrixModel = new MatrixModel();
     this.summaryModel = new SummaryModel();
 }
 
-KeyboardController.prototype.onKeyPress = function (event) {
+Controller.prototype.onKeyPress = function (event) {
     var key;
     switch (event.keyCode) {
         case 38:
@@ -26,7 +26,7 @@ KeyboardController.prototype.onKeyPress = function (event) {
     this.summaryModel.countBestScore();
 };
 
-KeyboardController.prototype.onClickNewGame = function () {
+Controller.prototype.onClickNewGame = function () {
     this.matrixModel.startNewGame();
     this.summaryModel.reset();
 };

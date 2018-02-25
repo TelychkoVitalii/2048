@@ -4,12 +4,9 @@ function BaseView() {
 
 BaseView.prototype.show = function (element) {
     this.beforeRender();
-
     this.rootElement.innerHTML = this.render();
     this.rootElement.classList.add(this.className);
-
     element.appendChild(this.rootElement);
-
     this.aftRender();
 };
 

@@ -12,6 +12,7 @@
 
 #title {
     font-size: 5rem;
+    margin: 22px 0 22px 0;
 }
 
 .score, .best {
@@ -19,7 +20,7 @@
     text-align: center;
     background: lightgray;
     color: white;
-    padding: 8px 22px;
+    padding: 8px 32px;
     border-radius: 8%;
 }
 
@@ -40,7 +41,7 @@
 .scoreAddition {
     position: absolute;
     top: -25px;
-    left: 37px;
+    left: 46px;
     color: #655e5e;
     animation: move-up 600ms ease-in;
 }

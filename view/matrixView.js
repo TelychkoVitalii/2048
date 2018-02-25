@@ -1,6 +1,6 @@
 function MatrixView() {
     this.matrixModel = new MatrixModel();
-    this.keaboardController = new KeyboardController();
+    this.controller = new Controller();
     this.template = document.getElementById('matrixTemplate').innerHTML;
     this.className = 'table';
     BaseView.call(this);
@@ -27,7 +27,7 @@ MatrixView.prototype.render = function () {
 };
 
 MatrixView.prototype.aftRender = function () {
-    document.onkeydown = this.keaboardController.onKeyPress.bind(this.keaboardController);
+    window.onkeydown = this.controller.onKeyPress.bind(this.controller);
     var newGameButton = document.getElementById('newGameBtn');
-    newGameButton.addEventListener('click', this.keaboardController.onClickNewGame.bind(this.keaboardController));
+    newGameButton.addEventListener('click', this.controller.onClickNewGame.bind(this.controller));
 };

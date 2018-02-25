@@ -20,6 +20,7 @@ function MatrixModel() {
     };
 
     !localStorage.getItem('matrix') && this.fillMatrixCell(true);
+    localStorage.removeItem('addition');
 }
 
 MatrixModel.prototype = Object.create(BaseModel.prototype);
